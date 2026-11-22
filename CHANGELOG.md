@@ -4,6 +4,8 @@ All notable changes to Buoy are listed here. The format follows [Keep a Changelo
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-11-22
+
 ### Added
 
 - Buoy works inside full-screen apps: it stays hidden there and slides up when you push the pointer against the bottom edge, then slides away again when you move off it.
@@ -37,6 +39,7 @@ First public release. Buoy was developed privately under the working name "Zweef
 - Settings for icon size, magnification, distance from the bottom, open apps, Trash and opening at login.
 - `build.sh` with `--install` and `--zip`, and universal (Apple silicon + Intel) builds.
 
-[Unreleased]: https://github.com/esiltu/buoy-dock/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/esiltu/buoy-dock/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/esiltu/buoy-dock/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/esiltu/buoy-dock/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/esiltu/buoy-dock/releases/tag/v1.0.0
