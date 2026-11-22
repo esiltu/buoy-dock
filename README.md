@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/icon.png" width="128" alt="Buoy app icon">
+  <img src="docs/icon.png?v=1.2.0" width="128" alt="Buoy app icon">
 </p>
 
 <h1 align="center">Buoy</h1>
@@ -21,7 +21,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/hero.png" alt="Buoy floating above the desktop, magnifying the Photos icon under the pointer">
+  <img src="docs/hero.png?v=1.2.0" alt="Buoy floating above the desktop, magnifying the Photos icon under the pointer">
 </p>
 
 ## Why pay when it's free?
@@ -95,7 +95,7 @@ You can also open `Package.swift` in Xcode.
 Double-clicking Buoy.app while it's running also opens Settings.
 
 <p align="center">
-  <img src="docs/settings.png" width="560" alt="Buoy settings window">
+  <img src="docs/settings.png?v=1.2.0" width="560" alt="Buoy settings window">
 </p>
 
 ### Settings

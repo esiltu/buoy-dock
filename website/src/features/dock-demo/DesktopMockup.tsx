@@ -4,7 +4,7 @@ import { DockDemo } from './DockDemo'
 /** A warm, calm desktop with the interactive dock floating at the bottom. Gradients only: no blur filters. */
 export function DesktopMockup() {
   return (
-    <figure className="mx-auto w-full max-w-6xl">
+    <figure id="demo" className="mx-auto w-full max-w-6xl scroll-mt-24">
       <div className="relative h-[380px] overflow-hidden rounded-[22px] sm:h-auto sm:aspect-[16/9] border border-line-strong shadow-[0_40px_80px_-40px_rgb(60_35_15/0.5)]">
         <div
           className="absolute inset-0"
