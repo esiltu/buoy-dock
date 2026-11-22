@@ -6,14 +6,18 @@
 
 <p align="center">
   <strong>A floating Liquid Glass dock for macOS. Free and open source.</strong><br>
-  It floats above your desktop, gets out of the way of your windows, and never asks for money.
+  It floats above your desktop, gets out of the way of your windows, and never asks for money.<br><br>
+  <a href="https://esiltu.github.io/buoy-dock/"><strong>Website</strong></a> ·
+  <a href="https://github.com/esiltu/buoy-dock/releases/latest"><strong>Download</strong></a> ·
+  <a href="#how-to-use-it"><strong>How to use</strong></a> ·
+  <a href="CHANGELOG.md"><strong>Changelog</strong></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/esiltu/buoy-dock/releases/latest"><img alt="Download the latest release" src="https://img.shields.io/github/v/release/esiltu/buoy-dock?label=download&style=for-the-badge&color=2f6bff"></a>
-  <img alt="Requires macOS 26 or later" src="https://img.shields.io/badge/macOS-26%2B-111?style=for-the-badge&logo=apple&logoColor=white">
-  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/github/license/esiltu/buoy-dock?style=for-the-badge&color=111"></a>
-  <a href="https://github.com/esiltu/buoy-dock/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/esiltu/buoy-dock?style=for-the-badge&color=2f6bff"></a>
+  <a href="https://github.com/esiltu/buoy-dock/releases/latest"><img alt="Download the latest release" src="https://img.shields.io/github/v/release/esiltu/buoy-dock?label=download&style=for-the-badge&color=c2410c"></a>
+  <img alt="Requires macOS 26 or later" src="https://img.shields.io/badge/macOS-26%2B-1d1814?style=for-the-badge&logo=apple&logoColor=white">
+  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/github/license/esiltu/buoy-dock?style=for-the-badge&color=1d1814"></a>
+  <a href="https://github.com/esiltu/buoy-dock/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/esiltu/buoy-dock?style=for-the-badge&color=c2410c"></a>
 </p>
 
 <p align="center">

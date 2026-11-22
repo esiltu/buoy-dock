@@ -70,9 +70,8 @@ struct TooltipLabel: View {
             .padding(.vertical, 5)
         if docsRendering {
             label
-                .foregroundStyle(.white)
-                .background(Capsule().fill(.white.opacity(0.2)))
-                .overlay(Capsule().strokeBorder(.white.opacity(0.35), lineWidth: 0.8))
+                .foregroundStyle(Color(red: 0.98, green: 0.965, blue: 0.94))
+                .background(Capsule().fill(Color(red: 0.114, green: 0.094, blue: 0.078)))
         } else {
             label.glassEffect(.regular, in: .capsule)
         }
@@ -99,12 +98,9 @@ struct DockBackground: View {
         let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
         if docsRendering {
             shape
-                .fill(.white.opacity(0.16))
-                .overlay(shape.strokeBorder(
-                    LinearGradient(colors: [.white.opacity(0.55), .white.opacity(0.12)], startPoint: .top, endPoint: .bottom),
-                    lineWidth: 1
-                ))
-                .shadow(color: .black.opacity(0.28), radius: 22, y: 10)
+                .fill(.white.opacity(0.45))
+                .overlay(shape.strokeBorder(.white.opacity(0.75), lineWidth: 1))
+                .shadow(color: Color(red: 0.35, green: 0.16, blue: 0.05).opacity(0.3), radius: 22, y: 10)
         } else {
             Color.clear
                 .glassEffect(.regular, in: shape)

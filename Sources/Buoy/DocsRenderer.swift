@@ -62,16 +62,19 @@ enum DocsRenderer {
         let size = NSSize(width: 500, height: 925)
         let window = DocsWindow(contentRect: NSRect(origin: NSPoint(x: -6000, y: 200), size: size),
                                 styleMask: [.borderless], backing: .buffered, defer: false)
-        window.appearance = NSAppearance(named: .darkAqua)
+        window.appearance = NSAppearance(named: .aqua)
         let host = NSHostingView(rootView: SettingsView(settings: settings, model: model, height: size.height))
         window.contentView = host
         window.orderFrontRegardless()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-            if let screenshot = snapshot(host, background: NSColor(srgbRed: 0.12, green: 0.12, blue: 0.13, alpha: 1)) {
-                let renderer = ImageRenderer(content: DocsSettingsScene(screenshot: screenshot))
-                renderer.scale = 2
-                write(renderer.cgImage, to: url)
+            if let screenshot = snapshot(host, background: NSColor(srgbRed: 0.95, green: 0.95, blue: 0.96, alpha: 1)) {
+                let window = ImageRenderer(content: DocsWindowOnly(screenshot: screenshot))
+                window.scale = 2
+                write(window.cgImage, to: url.deletingLastPathComponent().appendingPathComponent("settings-window.png"))
+                let scene = ImageRenderer(content: DocsSettingsScene(screenshot: screenshot))
+                scene.scale = 2
+                write(scene.cgImage, to: url)
             }
             window.orderOut(nil)
             completion()
@@ -127,25 +130,25 @@ private final class DocsWindow: NSWindow {
     override func constrainFrameRect(_ frameRect: NSRect, to screen: NSScreen?) -> NSRect { frameRect }
 }
 
-/// A calm, original blue backdrop for the README images.
+/// A warm, original backdrop for the README images, matching the website.
 private struct DocsWallpaper: View {
     var body: some View {
         ZStack {
             LinearGradient(
-                colors: [Color(red: 0.03, green: 0.07, blue: 0.24), Color(red: 0.10, green: 0.27, blue: 0.78), Color(red: 0.38, green: 0.60, blue: 1.0)],
+                colors: [Color(red: 0.965, green: 0.894, blue: 0.812), Color(red: 0.937, green: 0.761, blue: 0.604), Color(red: 0.851, green: 0.541, blue: 0.322)],
                 startPoint: .topLeading, endPoint: .bottomTrailing
             )
             Ellipse()
-                .fill(Color(red: 0.62, green: 0.80, blue: 1.0).opacity(0.5))
-                .frame(width: 900, height: 240)
-                .rotationEffect(.degrees(-12))
-                .offset(x: 260, y: -70)
+                .fill(Color(red: 1.0, green: 0.925, blue: 0.84).opacity(0.85))
+                .frame(width: 900, height: 260)
+                .rotationEffect(.degrees(-10))
+                .offset(x: 280, y: -90)
                 .blur(radius: 70)
             Ellipse()
-                .fill(Color(red: 0.02, green: 0.05, blue: 0.2).opacity(0.75))
-                .frame(width: 1000, height: 280)
+                .fill(Color(red: 0.66, green: 0.38, blue: 0.2).opacity(0.5))
+                .frame(width: 1000, height: 300)
                 .rotationEffect(.degrees(8))
-                .offset(x: -260, y: 160)
+                .offset(x: -280, y: 170)
                 .blur(radius: 80)
         }
     }
@@ -165,7 +168,7 @@ private struct DocsHeroScene: View {
         .frame(width: 1280, height: 420)
         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
         .environment(\.docsRendering, true)
-        .environment(\.colorScheme, .dark)
+        .environment(\.colorScheme, .light)
     }
 }
 
@@ -175,36 +178,41 @@ private struct DocsSettingsScene: View {
     var body: some View {
         ZStack {
             DocsWallpaper()
-            VStack(spacing: 0) {
-                ZStack {
-                    HStack(spacing: 8) {
-                        trafficLight(Color(red: 1.0, green: 0.37, blue: 0.34))
-                        trafficLight(Color(red: 1.0, green: 0.74, blue: 0.18))
-                        trafficLight(Color(red: 0.16, green: 0.79, blue: 0.25))
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading, 14)
-                    Text("Buoy")
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(.white.opacity(0.85))
-                }
-                .frame(width: screenshot.size.width, height: 30)
-                .background(Color(white: 0.17))
-
-                Image(nsImage: screenshot)
-                    .resizable()
-                    .frame(width: screenshot.size.width, height: screenshot.size.height)
-            }
-            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-            .overlay(RoundedRectangle(cornerRadius: 14, style: .continuous).strokeBorder(.white.opacity(0.12)))
-            .shadow(color: .black.opacity(0.45), radius: 30, y: 18)
+            DocsWindowOnly(screenshot: screenshot)
+                .shadow(color: Color(red: 0.35, green: 0.16, blue: 0.05).opacity(0.35), radius: 30, y: 18)
         }
         .frame(width: screenshot.size.width + 160, height: screenshot.size.height + 30 + 120)
         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-        .environment(\.colorScheme, .dark)
     }
+}
 
-    private func trafficLight(_ color: Color) -> some View {
-        Circle().fill(color).frame(width: 12, height: 12)
+/// The settings window on its own (light appearance), for the website.
+private struct DocsWindowOnly: View {
+    let screenshot: NSImage
+
+    var body: some View {
+        VStack(spacing: 0) {
+            ZStack {
+                HStack(spacing: 8) {
+                    ForEach([Color(red: 1.0, green: 0.37, blue: 0.34), Color(red: 1.0, green: 0.74, blue: 0.18), Color(red: 0.16, green: 0.79, blue: 0.25)], id: \.self) { color in
+                        Circle().fill(color).frame(width: 12, height: 12)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 14)
+                Text("Buoy")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(.black.opacity(0.8))
+            }
+            .frame(width: screenshot.size.width, height: 30)
+            .background(Color(white: 0.93))
+
+            Image(nsImage: screenshot)
+                .resizable()
+                .frame(width: screenshot.size.width, height: screenshot.size.height)
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: 12, style: .continuous).strokeBorder(.black.opacity(0.1)))
+        .environment(\.colorScheme, .light)
     }
 }

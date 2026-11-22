@@ -1,4 +1,5 @@
-// Draws the app icon (deep blue tile with a floating glass bar) and turns it into AppIcon.icns.
+// Draws the app icon (warm ember tile with a floating paper bar, in the website's palette)
+// and turns it into AppIcon.icns.
 // Usage: swift scripts/make-icon.swift <output-folder>
 import AppKit
 
@@ -23,12 +24,12 @@ func render(pixels: Int) -> Data {
 
     // Background
     let background = NSBezierPath(roundedRect: NSRect(x: 100, y: 100, width: 824, height: 824), xRadius: 186, yRadius: 186)
-    NSGradient(colors: [color(0x0A1A4F), color(0x1F4FD8), color(0x4C86FF)])!.draw(in: background, angle: 65)
+    NSGradient(colors: [color(0xB23C0C), color(0xEA580C), color(0xF7A463)])!.draw(in: background, angle: 65)
 
     // Soft light from the top
     NSGraphicsContext.saveGraphicsState()
     background.addClip()
-    NSGradient(colors: [color(0xFFFFFF, 0.18), color(0xFFFFFF, 0)])!
+    NSGradient(colors: [color(0xFFFFFF, 0.22), color(0xFFFFFF, 0)])!
         .draw(in: NSRect(x: 100, y: 560, width: 824, height: 364), angle: -90)
     NSGraphicsContext.restoreGraphicsState()
 
@@ -36,22 +37,22 @@ func render(pixels: Int) -> Data {
     let bar = NSBezierPath(roundedRect: NSRect(x: 252, y: 330, width: 520, height: 136), xRadius: 68, yRadius: 68)
     NSGraphicsContext.saveGraphicsState()
     let shadow = NSShadow()
-    shadow.shadowColor = color(0x000000, 0.35)
+    shadow.shadowColor = color(0x5A2A0E, 0.45)
     shadow.shadowBlurRadius = 44
     shadow.shadowOffset = NSSize(width: 0, height: -26)
     shadow.set()
-    color(0xFFFFFF, 0.9).setFill()
+    color(0xFAF6F0, 0.97).setFill()
     bar.fill()
     NSGraphicsContext.restoreGraphicsState()
 
     // Three tiles on the bar + a dot under the middle one
-    let tiles: [UInt32] = [0x1F4FD8, 0x0A1A4F, 0x6FA0FF]
+    let tiles: [UInt32] = [0x1D1814, 0xEA580C, 0xD9C3A5]   // ink, ember, tan
     for (index, hex) in tiles.enumerated() {
         let x = 340 + CGFloat(index) * 126
         color(hex).setFill()
         NSBezierPath(roundedRect: NSRect(x: x, y: 368, width: 92, height: 76), xRadius: 22, yRadius: 22).fill()
     }
-    color(0x0A1A4F, 0.7).setFill()
+    color(0x1D1814, 0.7).setFill()
     NSBezierPath(ovalIn: NSRect(x: 506, y: 344, width: 12, height: 12)).fill()
 
     NSGraphicsContext.restoreGraphicsState()

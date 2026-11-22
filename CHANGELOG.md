@@ -4,6 +4,17 @@ All notable changes to Buoy are listed here. The format follows [Keep a Changelo
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-11-22
+
+### Changed
+
+- New warm app icon (ember orange with a paper-white dock bar), matching the new website.
+- README images now use the same warm look, with a light settings window.
+
+### Added
+
+- Website: https://esiltu.github.io/buoy-dock/
+
 ## [1.1.0] - 2026-11-22
 
 ### Added
@@ -39,7 +50,8 @@ First public release. Buoy was developed privately under the working name "Zweef
 - Settings for icon size, magnification, distance from the bottom, open apps, Trash and opening at login.
 - `build.sh` with `--install` and `--zip`, and universal (Apple silicon + Intel) builds.
 
-[Unreleased]: https://github.com/esiltu/buoy-dock/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/esiltu/buoy-dock/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/esiltu/buoy-dock/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/esiltu/buoy-dock/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/esiltu/buoy-dock/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/esiltu/buoy-dock/releases/tag/v1.0.0
