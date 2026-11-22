@@ -31,7 +31,7 @@ Dock replacements usually come with a price tag or a subscription. Buoy costs no
 - **Liquid Glass bar** that floats above the bottom edge of your screen.
 - **Smooth magnification** with the app's name above the icon under your pointer.
 - **Dodges your windows.** When the active window reaches the dock, Buoy slides away. Push the pointer against the bottom edge to bring it back.
-- **Stays on your desktop.** No flashing over full-screen apps while you swipe between Spaces, and hidden in Mission Control.
+- **Plays nice with full-screen apps.** Hidden while you swipe between Spaces and in Mission Control. In a full-screen app, push the pointer against the bottom edge and Buoy slides up right there.
 - **Drag and drop.** Drag icons to reorder them, drag one up to remove it, drop an app from Finder to add it, drop files on the Trash.
 - **Right-click menu** with Open/Show, Keep in Dock, Remove from Dock, Show in Finder and Quit.
 - **Open apps** get a dot, and apps you haven't pinned show up after a divider.
@@ -85,7 +85,7 @@ You can also open `Package.swift` in Xcode.
 | Drag an icon up, out of the dock | Remove it |
 | Drop an app from Finder on the dock | Add it |
 | Drop files on the Trash | Move them to the Trash |
-| Push the pointer against the bottom edge | Bring a hidden dock back |
+| Push the pointer against the bottom edge | Bring a hidden dock back, also inside full-screen apps |
 | Click the menu bar icon | Open Settings, hide the dock, quit |
 
 Double-clicking Buoy.app while it's running also opens Settings.
@@ -121,7 +121,6 @@ defaults delete com.apple.dock orientation; defaults delete com.apple.dock autoh
 ## Known limitations
 
 - **Mission Control always shows Apple's Dock.** It's drawn by Mission Control itself and no app can turn that off. Buoy keeps it as small as macOS allows, at the left edge.
-- **Full-screen apps:** Buoy lives on your desktops and stays out of full-screen apps.
 - **Minimized windows** go to Apple's hidden Dock, not to Buoy.
 - **No notification badges.** macOS doesn't share them with other apps.
 

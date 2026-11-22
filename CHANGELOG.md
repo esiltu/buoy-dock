@@ -4,6 +4,14 @@ All notable changes to Buoy are listed here. The format follows [Keep a Changelo
 
 ## [Unreleased]
 
+### Added
+
+- Buoy works inside full-screen apps: it stays hidden there and slides up when you push the pointer against the bottom edge, then slides away again when you move off it.
+
+### Changed
+
+- Entering a full-screen app hides the dock right away, so nothing lingers while you swipe between Spaces.
+
 ## [1.0.1] - 2026-11-22
 
 ### Fixed

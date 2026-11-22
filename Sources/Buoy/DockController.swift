@@ -19,9 +19,9 @@ final class DockUIState: ObservableObject {
 
 /// Borderless floating panel that never steals focus from the app you're working in.
 final class DockPanel: NSPanel {
-    /// Belongs to one desktop Space at a time, so it slides away with the desktop instead of hovering
-    /// over full-screen apps during a swipe, and it's hidden in Mission Control.
-    static let baseBehavior: NSWindow.CollectionBehavior = [.moveToActiveSpace, .transient, .ignoresCycle]
+    /// Belongs to one Space at a time, so it slides away with that Space instead of hovering over others
+    /// during a swipe; may be brought into a full-screen app's Space; hidden in Mission Control.
+    static let baseBehavior: NSWindow.CollectionBehavior = [.moveToActiveSpace, .transient, .ignoresCycle, .fullScreenAuxiliary]
 
     init() {
         super.init(
@@ -124,7 +124,7 @@ final class DockController {
         } else {
             needsOrderFront = true
         }
-        if settings.hideMode == .always || isCovered { hide(animated: false) }
+        if settings.hideMode == .always || isCovered || !isOnDesktopSpace { hide(animated: false) }
         handleMouse()
         startSpaceWatchdog()
     }
@@ -143,10 +143,12 @@ final class DockController {
     }
 
     private var shouldAutoHide: Bool {
+        // Full-screen apps fill the screen: there the dock always waits at the bottom edge.
+        guard isOnDesktopSpace else { return true }
         switch settings.hideMode {
-        case .never: false
-        case .always: true
-        case .whenCovered: isCovered
+        case .never: return false
+        case .always: return true
+        case .whenCovered: return isCovered
         }
     }
 
@@ -193,7 +195,7 @@ final class DockController {
     }
 
     private func handleMouse() {
-        guard isVisible, isOnDesktopSpace, let screen else { return }
+        guard isVisible, let screen else { return }
         let s = settings
         let frame = screen.frame
         let location = NSEvent.mouseLocation
@@ -206,6 +208,8 @@ final class DockController {
             // Bring it back: pointer against the bottom edge, generously around the dock.
             let inRevealZone = abs(dx) <= halfWidth + 80 && location.x >= frame.minX && location.x <= frame.maxX
             guard inRevealZone && abs(dy) <= 2 else { return }
+            // In a full-screen app the (still hidden) panel first moves into that app's Space.
+            if !panel.isOnActiveSpace { bringToActiveSpace() }
             show()
         }
 
@@ -347,8 +351,9 @@ final class DockController {
             isOnDesktopSpace = onDesktop
             if onDesktop {
                 contextSwitched()
-            } else {
-                setIgnoresMouse(true)
+            } else if isVisible {
+                // Entering a full-screen app: hidden until you push the pointer against the bottom edge.
+                hide(animated: false)
             }
         }
         guard isVisible, isOnDesktopSpace else { return }
@@ -364,7 +369,7 @@ final class DockController {
         panel.orderFrontRegardless()
         guard !panel.isOnActiveSpace else { return }
         // Fallback: join all Spaces for a moment so the panel lands on this one, then go back.
-        panel.collectionBehavior = [.canJoinAllSpaces, .transient, .ignoresCycle]
+        panel.collectionBehavior = [.canJoinAllSpaces, .transient, .ignoresCycle, .fullScreenAuxiliary]
         panel.orderFrontRegardless()
         DispatchQueue.main.async { [panel] in panel.collectionBehavior = DockPanel.baseBehavior }
     }
