@@ -1,26 +1,22 @@
 import { site } from '../../config/site'
-import { ProductHuntMark } from './BrandMarks'
 
+/** Product Hunt's official "Featured" badge, with the live upvote count. */
 export function ProductHuntBadge({ tone = 'light', className = '' }: { tone?: 'light' | 'dark'; className?: string }) {
-  const colors =
-    tone === 'light'
-      ? 'border-line-strong bg-white text-ink hover:border-ink/35'
-      : 'border-white/20 bg-white/5 text-paper hover:bg-white/10'
-
   return (
     <a
       href={site.productHuntUrl}
       target="_blank"
-      rel="noreferrer"
-      className={`inline-flex h-12 items-center gap-3 rounded-xl border pr-4 pl-2 transition-colors duration-200 ${colors} ${className}`}
+      rel="noopener noreferrer"
+      className={`inline-flex rounded-xl transition-transform duration-200 hover:-translate-y-0.5 ${className}`}
     >
-      <ProductHuntMark className="size-8" />
-      <span className="flex flex-col text-left leading-none">
-        <span className={`font-mono text-[10px] tracking-[0.14em] uppercase ${tone === 'light' ? 'text-ink-soft' : 'text-paper/70'}`}>
-          Find us on
-        </span>
-        <span className="mt-1 text-[15px] font-semibold tracking-tight">Product Hunt</span>
-      </span>
+      <img
+        src={site.productHuntBadge(tone)}
+        alt="Buoy, a free floating dock for macOS, featured on Product Hunt"
+        width={222}
+        height={48}
+        loading="lazy"
+        decoding="async"
+      />
     </a>
   )
 }

@@ -21,6 +21,15 @@
 </p>
 
 <p align="center">
+  <a href="https://www.producthunt.com/products/buoy-4?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-buoy-a6b36018-36b8-44ba-b913-24483b525dd6" target="_blank" rel="noopener noreferrer">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1326312&theme=dark">
+      <img alt="Buoy, a free floating dock for macOS, on Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1326312&theme=light">
+    </picture>
+  </a>
+</p>
+
+<p align="center">
   <img src="docs/hero.png?v=1.2.0" alt="Buoy floating above the desktop, magnifying the Photos icon under the pointer">
 </p>
 
@@ -28,7 +37,7 @@
 
 Dock replacements usually come with a price tag or a subscription. Buoy costs nothing. No license key, no trial, no account, no ads, no tracking. The whole source code is right here, so you can read every line, change whatever you like and build it yourself.
 
-**Like Buoy? Give it a ⭐ star.** It takes one click and helps other people find it. Know someone who'd enjoy a nicer dock? **Send them the link.**
+**Like Buoy? Give it a ⭐ star** and an [upvote on Product Hunt](https://www.producthunt.com/products/buoy-4). It takes one click and helps other people find it. Know someone who'd enjoy a nicer dock? **Send them the link.**
 
 ## Features
 

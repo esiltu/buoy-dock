@@ -10,15 +10,6 @@ export function GitHubMark({ className = 'size-5' }: MarkProps) {
   )
 }
 
-export function ProductHuntMark({ className = 'size-8' }: MarkProps) {
-  return (
-    <svg viewBox="0 0 40 40" aria-hidden className={className}>
-      <circle cx="20" cy="20" r="20" fill="#FF6154" />
-      <path fill="#fff" d="M22.67 20H17v-6h5.67a3 3 0 0 1 0 6Zm0-10H13v20h4v-6h5.67a7 7 0 0 0 0-14Z" />
-    </svg>
-  )
-}
-
 export function AppleMark({ className = 'size-5' }: MarkProps) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden className={className} fill="currentColor">
