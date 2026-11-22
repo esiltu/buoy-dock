@@ -92,7 +92,9 @@ final class DockController {
     private var cancellables = Set<AnyCancellable>()
     private var hideTask: Task<Void, Never>?
     private var switchCheckTask: Task<Void, Never>?
+    private var spaceCheckTask: Task<Void, Never>?
     private var coverageTimer: Timer?
+    private var spaceTimer: Timer?
     private var pressStartedInDock = false
     /// The active window overlaps the dock (only used by the "Dodge windows" mode).
     private var isCovered = false
@@ -124,12 +126,16 @@ final class DockController {
         }
         if settings.hideMode == .always || isCovered { hide(animated: false) }
         handleMouse()
+        startSpaceWatchdog()
     }
 
     func setVisible(_ visible: Bool) {
         isVisible = visible
         if visible {
-            if isOnDesktopSpace { panel.orderFrontRegardless() } else { needsOrderFront = true }
+            // An explicit "Show Dock" always brings it back on the desktop you're looking at.
+            needsOrderFront = true
+            reconcileSpace()
+            if ui.isHidden && !shouldAutoHide { show() }
             handleMouse()
         } else {
             panel.orderOut(nil)
@@ -311,18 +317,46 @@ final class DockController {
 
     // MARK: - Spaces
 
+    /// The Space notification can arrive while macOS still reports the previous Space, so check again
+    /// a few times right after it.
     private func activeSpaceChanged() {
-        isOnDesktopSpace = !Spaces.isFullScreenActive
-        guard isVisible else { return }
-        if !isOnDesktopSpace {
-            setIgnoresMouse(true)
-            return
+        reconcileSpace()
+        spaceCheckTask?.cancel()
+        spaceCheckTask = Task { @MainActor [weak self] in
+            for delay in [0.15, 0.25, 0.4] {
+                try? await Task.sleep(for: .seconds(delay))
+                guard !Task.isCancelled else { return }
+                self?.reconcileSpace()
+            }
         }
-        if needsOrderFront || !panel.isOnActiveSpace {
+    }
+
+    /// Safety net: twice a second, make sure the dock is on screen whenever a desktop is active.
+    private func startSpaceWatchdog() {
+        let timer = Timer(timeInterval: 0.5, repeats: true) { [weak self] _ in
+            MainActor.assumeIsolated { self?.reconcileSpace() }
+        }
+        timer.tolerance = 0.2
+        RunLoop.main.add(timer, forMode: .common)
+        spaceTimer = timer
+    }
+
+    private func reconcileSpace() {
+        let onDesktop = !Spaces.isFullScreenActive
+        if onDesktop != isOnDesktopSpace {
+            isOnDesktopSpace = onDesktop
+            if onDesktop {
+                contextSwitched()
+            } else {
+                setIgnoresMouse(true)
+            }
+        }
+        guard isVisible, isOnDesktopSpace else { return }
+        if needsOrderFront || !panel.isVisible || !panel.isOnActiveSpace {
             needsOrderFront = false
             bringToActiveSpace()
+            handleMouse()
         }
-        contextSwitched()
     }
 
     /// Follows you to another desktop (never into a full-screen app).

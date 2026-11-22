@@ -4,6 +4,13 @@ All notable changes to Buoy are listed here. The format follows [Keep a Changelo
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-11-22
+
+### Fixed
+
+- The dock could stay gone after returning to the desktop when Buoy was started, or a Space switch happened, while a full-screen app was active. Buoy now checks again right after every Space switch and keeps a light watchdog that brings the dock back whenever a desktop is active.
+- **Show Dock** in the menu bar now always brings the dock back on the desktop you're looking at.
+
 ## [1.0.0] - 2026-11-22
 
 First public release. Buoy was developed privately under the working name "Zweef"; its settings are imported automatically.
@@ -22,5 +29,6 @@ First public release. Buoy was developed privately under the working name "Zweef
 - Settings for icon size, magnification, distance from the bottom, open apps, Trash and opening at login.
 - `build.sh` with `--install` and `--zip`, and universal (Apple silicon + Intel) builds.
 
-[Unreleased]: https://github.com/esiltu/buoy-dock/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/esiltu/buoy-dock/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/esiltu/buoy-dock/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/esiltu/buoy-dock/releases/tag/v1.0.0
