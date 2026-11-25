@@ -50,6 +50,7 @@ Dock replacements usually come with a price tag or a subscription. Buoy costs no
 - **Open apps** get a dot, and apps you haven't pinned show up after a divider.
 - **Imports your current Dock** on first launch, so your apps are already there.
 - **One click to tuck Apple's Dock away**, one click to bring it back exactly as it was.
+- **Starts with your Mac.** Buoy adds itself to Login Items, so your dock is there right after a restart.
 - **Native and light.** Written in Swift and SwiftUI, runs from the menu bar, no Electron.
 
 ## Download and install
@@ -64,7 +65,7 @@ Dock replacements usually come with a price tag or a subscription. Buoy costs no
      xattr -dr com.apple.quarantine /Applications/Buoy.app
      ```
 
-4. Buoy asks whether it may tuck the macOS Dock away. Click **Hide macOS Dock**. That's it.
+4. Buoy asks whether it may tuck the macOS Dock away. Click **Hide macOS Dock**. That's it: Buoy also adds itself to Login Items, so it starts with your Mac from now on.
 
 Buoy runs on macOS 26 Tahoe and later, on Apple silicon and Intel Macs.
 
@@ -118,7 +119,7 @@ Double-clicking Buoy.app while it's running also opens Settings.
 | **Hiding** | *Dodge windows* (default), *Auto-hide* or *Always visible* |
 | **Show open apps** | Show running apps you haven't pinned |
 | **Show Trash** | Show the Trash at the end of the dock |
-| **Open at login** | Start Buoy automatically |
+| **Open at login** | On by default, so the dock is there after a restart. Switch it off and Buoy remembers. |
 | **Import from macOS Dock** | Copy the apps from Apple's Dock again |
 
 ## About Apple's Dock

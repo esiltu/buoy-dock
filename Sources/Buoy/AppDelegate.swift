@@ -37,6 +37,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
+            // Start with the Mac, so there's always a dock after a restart (unless switched off in Settings).
+            LoginItem.ensureRegistered()
             self.offerToHideSystemDock()
             let defaults = UserDefaults.standard
             if !defaults.bool(forKey: "didShowWelcome") || arguments.contains("--settings") {

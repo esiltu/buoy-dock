@@ -60,7 +60,15 @@ struct SettingsView: View {
                 Toggle("Show Trash", isOn: $settings.showTrash)
                 Toggle("Open at login", isOn: loginBinding)
                 if loginStatus == .requiresApproval {
-                    Text("Approve Buoy in System Settings › General › Login Items.")
+                    HStack {
+                        Text("Approve Buoy in System Settings › General › Login Items.")
+                            .font(.callout)
+                            .foregroundStyle(.secondary)
+                        Spacer()
+                        Button("Open") { SMAppService.openSystemSettingsLoginItems() }
+                    }
+                } else if loginStatus != .enabled {
+                    Text("Recommended: with Apple's Dock hidden, you'd have no dock after a restart until you open Buoy.")
                         .font(.callout)
                         .foregroundStyle(.secondary)
                 }
@@ -102,11 +110,7 @@ struct SettingsView: View {
             get: { loginStatus == .enabled || loginStatus == .requiresApproval },
             set: { enable in
                 do {
-                    if enable {
-                        try SMAppService.mainApp.register()
-                    } else {
-                        try SMAppService.mainApp.unregister()
-                    }
+                    try LoginItem.setEnabled(enable)
                     loginError = nil
                 } catch {
                     loginError = "That didn't work: \(error.localizedDescription)"

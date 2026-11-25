@@ -14,6 +14,6 @@ export const site = {
   productHuntBadge: (theme: 'light' | 'dark') =>
     `https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1326312&theme=${theme}`,
   /** Shown while the latest release is loading, or if GitHub can't be reached. */
-  fallbackVersion: '1.2.0',
+  fallbackVersion: '1.3.0',
   requirements: 'macOS 26+ · Apple silicon & Intel',
 } as const

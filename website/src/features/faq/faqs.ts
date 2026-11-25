@@ -19,6 +19,11 @@ export const faqs = [
       'Anytime. Open Buoy’s settings from the menu bar and click Restore macOS Dock. Buoy saved your original Dock settings and puts them back exactly.',
   },
   {
+    question: 'Does Buoy start with my Mac?',
+    answer:
+      'Yes. Buoy adds itself to Login Items, so your dock is there right after a restart. You can switch this off in Settings › Open at login.',
+  },
+  {
     question: 'Does it work with full-screen apps?',
     answer:
       'Yes. Buoy hides while you swipe between Spaces, and inside a full-screen app it slides up when you push the pointer against the bottom edge.',

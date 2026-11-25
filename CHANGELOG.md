@@ -4,6 +4,17 @@ All notable changes to Buoy are listed here. The format follows [Keep a Changelo
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-11-25
+
+### Fixed
+
+- After restarting the Mac there was no dock until you opened Buoy yourself, because Apple's Dock is hidden and Buoy didn't start at login.
+
+### Changed
+
+- **Open at login is now on by default.** Buoy adds itself to Login Items at launch. If you switch it off in Settings, Buoy remembers and leaves it off.
+- If macOS needs your approval for the login item, Buoy asks once and opens System Settings › General › Login Items for you.
+
 ## [1.2.0] - 2026-11-22
 
 ### Changed
@@ -50,7 +61,8 @@ First public release. Buoy was developed privately under the working name "Zweef
 - Settings for icon size, magnification, distance from the bottom, open apps, Trash and opening at login.
 - `build.sh` with `--install` and `--zip`, and universal (Apple silicon + Intel) builds.
 
-[Unreleased]: https://github.com/esiltu/buoy-dock/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/esiltu/buoy-dock/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/esiltu/buoy-dock/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/esiltu/buoy-dock/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/esiltu/buoy-dock/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/esiltu/buoy-dock/compare/v1.0.0...v1.0.1
